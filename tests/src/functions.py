@@ -1,0 +1,3 @@
+def transform_to_hc_api_request(hc_ams_request, jwt_token):
+    ...
+    return ""
