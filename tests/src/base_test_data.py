@@ -3,6 +3,9 @@ from base_token import TOKEN
 
 GEMEENTE_AMSTERDAM_CODE = "0363"
 GEMEENTE_VAN_INSCHRIJVING_PARAMETER = "gemeenteVanInschrijving"
+PERMISSION_SCOPE_AMSTERDAM = "gob_brp_algemeen_amsterdam"
+PERMISSION_SCOPE_LANDELIJK = "gob_brp_algemeen_landelijk"
+
 
 def scope_groups():
     scope_to_id = {
@@ -176,27 +179,28 @@ def is_zoekvraag_authorised(hc_ams_request, token):
 
 def is_amsterdam_authorised(token):
     return (
-            FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_amsterdam"]
+            FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_AMSTERDAM]
             in token["groups"]
     )
 
 
 def is_landelijk_authorised(token):
     return (
-            FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_landelijk"]
+            FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_LANDELIJK]
             in token["groups"]
     )
 
 
 def has_amsterdam_query_parameter(hc_api_request):
-    key = GEMEENTE_VAN_INSCHRIJVING_PARAMETER
-    return key in hc_api_request and hc_api_request[key] == GEMEENTE_AMSTERDAM_CODE
+    return (GEMEENTE_VAN_INSCHRIJVING_PARAMETER in hc_api_request and
+            hc_api_request[GEMEENTE_VAN_INSCHRIJVING_PARAMETER] == GEMEENTE_AMSTERDAM_CODE)
 
 
 def transform_request_amsterdam_landelijk(hc_ams_request, jwt_token):
-    if FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_amsterdam"] in jwt_token["groups"]:
+    if FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_AMSTERDAM] in jwt_token["groups"]:
         hc_ams_request[GEMEENTE_VAN_INSCHRIJVING_PARAMETER] = GEMEENTE_AMSTERDAM_CODE
     return hc_ams_request
+
 
 def transform_request_filters(hc_ams_request, jwt_token):
     hc_ams_request = transform_request_amsterdam_landelijk(hc_ams_request, jwt_token)
