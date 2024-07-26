@@ -4,7 +4,6 @@
 2. RaadpleegMetBurgerservicenummer
 3. ZoekMetPostcodeEnHuisnummer
 
-
 ## Testcontext
 
 - gebruikersgroep A, deze groep mag gebruik maken van Zoekfunctie 1
@@ -15,23 +14,21 @@
 - gebruikersgroep C, deze groep mag gebruik maken van Scope C (bv Persoon basis+Adres)
 - gebruikersgroep A, deze groep mag inclusief overleden personen gegevens bevragen
 - gebruikersgroep B, deze groep mag Amsterdammers bevragen
-- gebruikersgroep C, deze groep mag landelijke personen
+- gebruikersgroep C, deze groep mag landelijke personen bevragen
 
-- profiel A: scope_A, gob_brp_raadplegen_geslachtsnaam_geboortedatum, 
+- profiel A: scope_A, gob_brp_raadplegen_geslachtsnaam_geboortedatum,
 - profiel B: scope_B, gob_brp_raadplegen_bsn
 - profiel C: scope_B, scope_C, gob_brp_raadplegen_postcode_huisnummer
 
-
 ## Testcases
 
-- worden de HC API filters goed gedefinieerd voor de verschillende data scopes?
-- worden de HC AMS API aanroepen omgezet naar de juiste filters?
-- worden de zoekvragen goed gevalideerd voor de gebruikersgroepen?
-- wordt de validatie van Amsterdam-ingezetenen goed uitgevoerd?
+* worden de zoekvragen goed gevalideerd voor de gebruikersgroepen?
+* wordt de validatie van Amsterdam-ingezetenen goed uitgevoerd?
+* worden de HC AMS API aanroepen omgezet naar de juiste filters?
 - wordt de selectie op overledenen goed toegepast?
 
-
 ## Autorisatie profielen
+
 | functie                                                                   | application role                               |
 | ------------------------------------------------------------------------- | ---------------------------------------------- |
 | Algemeen GOB-BRP (nodig?<br>de volgende twee zou je ook kunnen gebruiken) | gob_brp_algemeen                               |
@@ -65,8 +62,8 @@ gob_brp_raadplegen_straat_gemeente 12345-00b
 gob_brp_raadplegen_nummer_identificatie 12345-00c
 gob_brp_raadplegen_adresseerbaarobject 12345-00d
 
-
 ## Data scopes
+
 scope_A 54321-A
 scope_B 54321-B
 scope_C 54321-C
@@ -74,8 +71,6 @@ scope_D 54321-D
 scope_E 54321-E
 scope_A 54321-F
 
-
 ## definitie gemeente Amsterdam
 
 gemeenteVanInschrijving == "0363"
-
