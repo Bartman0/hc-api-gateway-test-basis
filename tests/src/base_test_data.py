@@ -54,10 +54,7 @@ def functionality_zoekvragen():
         "gob_brp_raadplegen_postcode_huisnummer": "ZoekMetPostcodeEnHuisnummer",
     }
     zoekvraag_to_functionality = {v: k for k, v in functionality_to_zoekvraag.items()}
-    return {
-        "from_name": functionality_to_zoekvraag,
-        "from_id": zoekvraag_to_functionality,
-    }
+    return {"from_name": functionality_to_zoekvraag, "from_id": zoekvraag_to_functionality}
 
 
 FUNCTIONALITY_ZOEKVRAGEN = functionality_zoekvragen()
@@ -74,9 +71,6 @@ def profile_A():
     ]
 
 
-PROFILE_A = profile_A()
-
-
 # profiel B: scope_B, gob_brp_raadplegen_bsn, gob_brp_algemeen_landelijk
 def profile_B():
     return [
@@ -85,9 +79,6 @@ def profile_B():
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_amsterdam"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_bevragen"],
     ]
-
-
-PROFILE_B = profile_B()
 
 
 # profiel C: scope_B, scope_C, gob_brp_raadplegen_postcode_huisnummer, gb_brp_algemeen_amsterdam
@@ -101,46 +92,29 @@ def profile_C():
     ]
 
 
-PROFILE_C = profile_C()
+def profile(name):
+    if name == "A":
+        return profile_A()
+    if name == "B":
+        return profile_B()
+    if name == "C":
+        return profile_C()
+    raise ValueError("unknown user specified for a profile")
 
 
-def token_user_A():
+def token_user(name):
     token = deepcopy(TOKEN)
-    token["groups"].extend(profile_A())
-    token["name"] = "A, User"
-    token["family_name"] = "A"
-    token["unique_name"] = "user.A"
-    token["upn"] = "user.A@amsterdam.nl"
+    token["groups"].extend(profile(name))
+    token["name"] = f"{name}, User"
+    token["family_name"] = f"{name}"
+    token["unique_name"] = f"user.{name}"
+    token["upn"] = f"user.{name}@amsterdam.nl"
     return token
 
 
-TOKEN_USER_A = token_user_A()
-
-
-def token_user_B():
-    token = deepcopy(TOKEN)
-    token["groups"].extend(profile_B())
-    token["name"] = "B, User"
-    token["family_name"] = "B"
-    token["unique_name"] = "user.B"
-    token["upn"] = "user.B@amsterdam.nl"
-    return token
-
-
-TOKEN_USER_B = token_user_B()
-
-
-def token_user_C():
-    token = deepcopy(TOKEN)
-    token["groups"].extend(profile_C())
-    token["name"] = "C, User"
-    token["family_name"] = "C"
-    token["unique_name"] = "user.C"
-    token["upn"] = "user.C@amsterdam.nl"
-    return token
-
-
-TOKEN_USER_C = token_user_C()
+TOKEN_USER_A = token_user("A")
+TOKEN_USER_B = token_user("B")
+TOKEN_USER_C = token_user("C")
 
 
 def fields_persoon_basis():
