@@ -30,9 +30,7 @@ def make_fields_uniform(request):
     [
         (
                 {
-                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"][
-                        "gob_brp_raadplegen_geslachtsnaam_geboortedatum"
-                    ],
+                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_geslachtsnaam_geboortedatum"],
                     "geslachtsnaam": "Verhuis*",
                     "geboortedatum": "2002-07-01",
                     "inclusiefOverledenPersonen": True,
@@ -50,9 +48,7 @@ def make_fields_uniform(request):
         ),
         (
                 {
-                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"][
-                        "gob_brp_raadplegen_bsn"
-                    ],
+                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_bsn"],
                     "burgerservicenummer": ["999993653"],
                 },
                 {
@@ -66,9 +62,7 @@ def make_fields_uniform(request):
         ),
         (
                 {
-                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"][
-                        "gob_brp_raadplegen_postcode_huisnummer"
-                    ],
+                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_postcode_huisnummer"],
                     "postcode": "2593 BL",
                     "huisnummer": "101",
                 },
