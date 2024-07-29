@@ -23,6 +23,7 @@
 - profiel B: scope_B, gob_brp_raadplegen_bsn, gob_brp_algemeen_amsterdam
 - profiel C: scope_B, scope_C, gob_brp_raadplegen_postcode_huisnummer, gob_brp_algemeen_landelijk
 
+
 ## Testcases
 
 - wordt de functionaliteit op bevragen (API toegang) gevalideerd?
@@ -31,11 +32,13 @@
 - worden de HC AMS API aanroepen omgezet naar de juiste filters?
 * wordt de selectie op overledenen goed toegepast?
 
+
 ## Zoekfuncties
 
 1. ZoekMetGeslachtsnaamEnGeboortedatum
 2. RaadpleegMetBurgerservicenummer
 3. ZoekMetPostcodeEnHuisnummer
+
 
 ## Autorisatie profielen
 
@@ -74,6 +77,7 @@ In deze tests gebruiken we fictieve group id's voor deze groepen. In de echte AP
 | gob_brp_raadplegen_nummer_identificatie        | F-12345-00c |
 | gob_brp_raadplegen_adresseerbaarobject         | F-12345-00d |
 
+
 ## Data scopes
 
 | scope   | code      |
@@ -84,6 +88,7 @@ In deze tests gebruiken we fictieve group id's voor deze groepen. In de echte AP
 | scope_D | S-54321-D |
 | scope_E | S-54321-E |
 | scope_A | S-54321-F |
+
 
 ## definitie gemeente Amsterdam
 
