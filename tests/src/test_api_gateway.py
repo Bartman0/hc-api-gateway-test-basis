@@ -87,28 +87,19 @@ class TestClass:
     """
     Test of de aanroeper gebruik mag maken van de Bevragen functionaliteit
     """
-
-    def test_bevragen_authorisation(
-        self, hc_ams_request, hc_api_request, token, status_code
-    ):
+    def test_bevragen_authorisation(self, hc_ams_request, hc_api_request, token, status_code):
         assert has_bevragen_authorisation(hc_ams_request, token)
 
     """
     Test of de aanroeper de aangeduide zoekvraag mag uitvoeren
     """
-
-    def test_zoekvraag_authorisation(
-        self, hc_ams_request, hc_api_request, token, status_code
-    ):
+    def test_zoekvraag_authorisation(self, hc_ams_request, hc_api_request, token, status_code):
         assert is_zoekvraag_authorised(hc_ams_request, token)
 
     """
     Test of de aanroeper voldoet aan de scope waar ie recht op heeft: landelijk of amsterdam
     """
-
-    def test_amsterdam_landelijk_validation(
-        self, hc_ams_request, hc_api_request, token, status_code
-    ):
+    def test_amsterdam_landelijk_validation(self, hc_ams_request, hc_api_request, token, status_code):
         request_result = transform_request_amsterdam_landelijk(hc_ams_request, token)
         if is_amsterdam_authorised(token):
             assert has_amsterdam_query_parameter(request_result)
@@ -118,10 +109,7 @@ class TestClass:
     """
     Test of de aanroeper de query parameter 'inclusiefOverledenPersonen' mag toepassen of niet
     """
-
-    def test_inclusief_overledenen_validation(
-        self, hc_ams_request, hc_api_request, token, status_code
-    ):
+    def test_inclusief_overledenen_validation(self, hc_ams_request, hc_api_request, token, status_code):
         request_result = transform_request_amsterdam_landelijk(hc_ams_request, token)
         if has_inclusief_overledenen_query_parameter(request_result):
             assert is_inclusief_overledenen_authorised(token)
@@ -129,7 +117,6 @@ class TestClass:
     """
     Test of de filters goed worden gezet in het HC request op basis van de verleende data scopes 
     """
-
     def test_request_filters(self, hc_ams_request, hc_api_request, token, status_code):
         request_result = transform_request_filters(hc_ams_request, token)
         request_result = make_fields_uniform(request_result)
