@@ -2,9 +2,12 @@ from copy import deepcopy
 from base_token import TOKEN
 
 GEMEENTE_AMSTERDAM_CODE = "0363"
+
 GEMEENTE_VAN_INSCHRIJVING_PARAMETER = "gemeenteVanInschrijving"
+INCLUSIEF_OVERLEDENEN_PARAMETER = "inclusiefOverledenPersonen"
 PERMISSION_SCOPE_AMSTERDAM = "gob_brp_algemeen_amsterdam"
 PERMISSION_SCOPE_LANDELIJK = "gob_brp_algemeen_landelijk"
+PERMISSION_SCOPE_INCLUSIEF_OVERLEDENEN = "gob_brp_indicator_inclusief_overledenen"
 
 
 def scope_groups():
@@ -190,8 +193,7 @@ def is_amsterdam_authorised(token):
 
 
 def is_landelijk_authorised(token):
-    return (FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_LANDELIJK]
-            in token["groups"])
+    return FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_LANDELIJK] in token["groups"]
 
 
 def has_amsterdam_query_parameter(hc_api_request):
@@ -199,8 +201,16 @@ def has_amsterdam_query_parameter(hc_api_request):
             hc_api_request[GEMEENTE_VAN_INSCHRIJVING_PARAMETER] == GEMEENTE_AMSTERDAM_CODE)
 
 
-def has_gvi_query_parameter(hc_api_request):
+def has_gemeente_van_inschrijving_query_parameter(hc_api_request):
     return GEMEENTE_VAN_INSCHRIJVING_PARAMETER in hc_api_request
+
+
+def is_inclusief_overledenen_authorised(token):
+    return FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_INCLUSIEF_OVERLEDENEN] in token["groups"]
+
+
+def has_inclusief_overledenen_query_parameter(hc_api_request):
+    return INCLUSIEF_OVERLEDENEN_PARAMETER in hc_api_request
 
 
 def transform_request_amsterdam_landelijk(hc_ams_request, jwt_token):
