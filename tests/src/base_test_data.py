@@ -77,7 +77,7 @@ def profile_A():
     ]
 
 
-# profiel B: scope_B, gob_brp_raadplegen_bsn, gob_brp_algemeen_landelijk
+# profiel B: scope_B, gob_brp_raadplegen_bsn, gob_brp_algemeen_amsterdam
 def profile_B():
     return [
         SCOPE_GROUPS["from_name"]["scope_B"],
@@ -87,7 +87,7 @@ def profile_B():
     ]
 
 
-# profiel C: scope_B, scope_C, gob_brp_raadplegen_postcode_huisnummer, gb_brp_algemeen_amsterdam
+# profiel C: scope_B, scope_C, gob_brp_raadplegen_postcode_huisnummer, gb_brp_algemeen_landelijk
 def profile_C():
     return [
         SCOPE_GROUPS["from_name"]["scope_B"],
@@ -98,6 +98,24 @@ def profile_C():
     ]
 
 
+def profile_geen_brp_bevragen():
+    return [
+        SCOPE_GROUPS["from_name"]["scope_B"],
+        SCOPE_GROUPS["from_name"]["scope_C"],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_raadplegen_postcode_huisnummer"],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_amsterdam"],
+    ]
+
+
+def profile_geen_landelijk_permissie():
+    return [
+        SCOPE_GROUPS["from_name"]["scope_B"],
+        SCOPE_GROUPS["from_name"]["scope_C"],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_raadplegen_postcode_huisnummer"],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_amsterdam"],
+    ]
+
+
 def profile(name):
     if name == "A":
         return profile_A()
@@ -105,6 +123,10 @@ def profile(name):
         return profile_B()
     if name == "C":
         return profile_C()
+    if name == "geen_brp_bevragen":
+        return profile_geen_brp_bevragen()
+    if name == "geen_landelijk_permissie":
+        return profile_geen_landelijk_permissie()
     raise ValueError("unknown user specified for a profile")
 
 
@@ -121,6 +143,8 @@ def token_user(name):
 TOKEN_USER_A = token_user("A")
 TOKEN_USER_B = token_user("B")
 TOKEN_USER_C = token_user("C")
+TOKEN_USER_geen_brp_bevragen = token_user("geen_brp_bevragen")
+TOKEN_USER_geen_landelijk_permissie = token_user("geen_landelijk_permissie")
 
 
 def fields_persoon_basis():
@@ -222,3 +246,7 @@ def transform_request_filters(hc_ams_request, jwt_token):
             fields.extend(SCOPE_FIELDS["from_name"][scope])
     hc_ams_request["fields"] = list(set(fields))
     return hc_ams_request
+
+
+def make_fields_uniform(request):
+    request["fields"] = sorted(request["fields"])
