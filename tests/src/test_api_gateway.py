@@ -29,51 +29,51 @@ def make_fields_uniform(request):
     "hc_ams_request, hc_api_request, token, status_code",
     [
         (
-                {
-                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_geslachtsnaam_geboortedatum"],
-                    "geslachtsnaam": "Verhuis*",
-                    "geboortedatum": "2002-07-01",
-                    "inclusiefOverledenPersonen": True,
-                },
-                {
-                    "type": "ZoekMetGeslachtsnaamEnGeboortedatum",
-                    "geslachtsnaam": "Verhuis*",
-                    "geboortedatum": "2002-07-01",
-                    "gemeenteVanInschrijving": "0363",
-                    "inclusiefOverledenPersonen": True,
-                    "fields": list(set(FIELDS_PERSOON_BASIS)),
-                },
-                TOKEN_USER_A,
-                200,
+            {
+                "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_geslachtsnaam_geboortedatum"],
+                "geslachtsnaam": "Verhuis*",
+                "geboortedatum": "2002-07-01",
+                "inclusiefOverledenPersonen": True,
+            },
+            {
+                "type": "ZoekMetGeslachtsnaamEnGeboortedatum",
+                "geslachtsnaam": "Verhuis*",
+                "geboortedatum": "2002-07-01",
+                "gemeenteVanInschrijving": "0363",
+                "inclusiefOverledenPersonen": True,
+                "fields": list(set(FIELDS_PERSOON_BASIS)),
+            },
+            TOKEN_USER_A,
+            200,
         ),
         (
-                {
-                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_bsn"],
-                    "burgerservicenummer": ["999993653"],
-                },
-                {
-                    "type": "RaadpleegMetBurgerservicenummer",
-                    "burgerservicenummer": ["999993653"],
-                    "gemeenteVanInschrijving": "0363",
-                    "fields": list(set(FIELDS_PERSOON_BASIS + FIELDS_KINDEREN)),
-                },
-                TOKEN_USER_B,
-                200,
+            {
+                "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_bsn"],
+                "burgerservicenummer": ["999993653"],
+            },
+            {
+                "type": "RaadpleegMetBurgerservicenummer",
+                "burgerservicenummer": ["999993653"],
+                "gemeenteVanInschrijving": "0363",
+                "fields": list(set(FIELDS_PERSOON_BASIS + FIELDS_KINDEREN)),
+            },
+            TOKEN_USER_B,
+            200,
         ),
         (
-                {
-                    "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_postcode_huisnummer"],
-                    "postcode": "2593 BL",
-                    "huisnummer": "101",
-                },
-                {
-                    "type": "ZoekMetPostcodeEnHuisnummer",
-                    "postcode": "2593 BL",
-                    "huisnummer": "101",
-                    "fields": list(set(FIELDS_PERSOON_BASIS + FIELDS_KINDEREN + FIELDS_ADRES)),
-                },
-                TOKEN_USER_C,
-                200,
+            {
+                "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"]["gob_brp_raadplegen_postcode_huisnummer"],
+                "postcode": "2593 BL",
+                "huisnummer": "101",
+            },
+            {
+                "type": "ZoekMetPostcodeEnHuisnummer",
+                "postcode": "2593 BL",
+                "huisnummer": "101",
+                "fields": list(set(FIELDS_PERSOON_BASIS + FIELDS_KINDEREN + FIELDS_ADRES)),
+            },
+            TOKEN_USER_C,
+            200,
         ),
     ],
 )
