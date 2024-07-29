@@ -64,11 +64,10 @@ FUNCTIONALITY_ZOEKVRAGEN = functionality_zoekvragen()
 def profile_A():
     return [
         SCOPE_GROUPS["from_name"]["scope_A"],
-        FUNCTIONALITY_GROUPS["from_name"][
-            "gob_brp_raadplegen_geslachtsnaam_geboortedatum"
-        ],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_raadplegen_geslachtsnaam_geboortedatum"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_indicator_inclusief_overledenen"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_amsterdam"],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_bevragen"],
     ]
 
 
@@ -81,6 +80,7 @@ def profile_B():
         SCOPE_GROUPS["from_name"]["scope_B"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_raadplegen_bsn"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_amsterdam"],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_bevragen"],
     ]
 
 
@@ -94,6 +94,7 @@ def profile_C():
         SCOPE_GROUPS["from_name"]["scope_C"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_raadplegen_postcode_huisnummer"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_landelijk"],
+        FUNCTIONALITY_GROUPS["from_name"]["gob_brp_bevragen"],
     ]
 
 
@@ -172,6 +173,10 @@ def scope_fields():
 SCOPE_FIELDS = scope_fields()
 
 
+def has_bevragen_authorisation(hc_ams_request, token):
+    return FUNCTIONALITY_GROUPS["from_name"]["gob_brp_bevragen"] in token["groups"]
+
+
 def is_zoekvraag_authorised(hc_ams_request, token):
     zoekvraag = hc_ams_request["type"]
     return FUNCTIONALITY_GROUPS["from_name"][FUNCTIONALITY_ZOEKVRAGEN["from_id"][zoekvraag]] in token["groups"]
@@ -185,15 +190,17 @@ def is_amsterdam_authorised(token):
 
 
 def is_landelijk_authorised(token):
-    return (
-            FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_LANDELIJK]
-            in token["groups"]
-    )
+    return (FUNCTIONALITY_GROUPS["from_name"][PERMISSION_SCOPE_LANDELIJK]
+            in token["groups"])
 
 
 def has_amsterdam_query_parameter(hc_api_request):
     return (GEMEENTE_VAN_INSCHRIJVING_PARAMETER in hc_api_request and
             hc_api_request[GEMEENTE_VAN_INSCHRIJVING_PARAMETER] == GEMEENTE_AMSTERDAM_CODE)
+
+
+def has_gvi_query_parameter(hc_api_request):
+    return GEMEENTE_VAN_INSCHRIJVING_PARAMETER in hc_api_request
 
 
 def transform_request_amsterdam_landelijk(hc_ams_request, jwt_token):
