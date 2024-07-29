@@ -30,7 +30,7 @@
 - worden de zoekvragen goed gevalideerd voor de gebruikersgroepen?
 - wordt de validatie op bevragen Amsterdam/landelijk-ingezetenen goed uitgevoerd?
 - worden de HC AMS API aanroepen omgezet naar de juiste filters?
-* wordt de selectie op overledenen goed toegepast?
+- wordt de selectie op overledenen goed toegepast?
 
 
 ## Zoekfuncties
