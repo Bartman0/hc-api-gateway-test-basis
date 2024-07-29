@@ -1,3 +1,12 @@
+## Gebruik
+
+1. git clone de repository
+2. ga naar de project subdirectory
+3. maak een Python virtual env aan en activeer deze
+4. voer uit: 'pip install -r requirements.txt'
+5. voer uit: 'pytest'
+
+
 ## Testcontext
 
 - gebruikersgroep A, deze groep mag gebruik maken van Zoekfunctie 1
