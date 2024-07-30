@@ -73,6 +73,38 @@ class TestNegatives:
             }
         request_result = transform_request_amsterdam_landelijk(hc_ams_request, TOKEN_USER_geen_landelijk_permissie)
         if is_amsterdam_authorised(TOKEN_USER_geen_landelijk_permissie):
-            assert not is_landelijk_authorised(TOKEN_USER_geen_landelijk_permissie)
             assert has_amsterdam_query_parameter(request_result)
             assert has_gemeente_van_inschrijving_query_parameter(hc_ams_request)
+            assert not is_landelijk_authorised(TOKEN_USER_geen_landelijk_permissie)
+
+    def test_inclusief_overledenen_validation(self):
+        hc_ams_request = {
+                "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"][
+                    "gob_brp_raadplegen_geslachtsnaam_geboortedatum"
+                ],
+                "geslachtsnaam": "Verhuis*",
+                "geboortedatum": "2002-07-01",
+                "inclusiefOverledenPersonen": True,
+            }
+        token = TOKEN_USER_B
+        request_result = transform_request_amsterdam_landelijk(hc_ams_request, token)
+        if has_inclusief_overledenen_query_parameter(request_result):
+            assert not is_inclusief_overledenen_authorised(token)
+
+    """
+    Test of de filters goed worden gezet in het HC request op basis van de verleende data scopes 
+    """
+    def test_request_filters(self):
+        hc_ams_request = {
+            "type": FUNCTIONALITY_ZOEKVRAGEN["from_name"][
+                "gob_brp_raadplegen_bsn"
+            ],
+            "gob_brp_raadplegen_bsn": "1234567",
+        }
+        token = TOKEN_USER_A
+        request_result = transform_request_filters(hc_ams_request, token)
+        assert "kinderen" not in request_result["fields"]
+        assert "adressering" not in request_result["fields"]
+        for field in request_result["fields"]:
+            assert "kinderen" not in field
+            assert "addressering" not in field
