@@ -90,7 +90,6 @@ def profile_B():
 # profiel C: scope_B, scope_C, gob_brp_raadplegen_postcode_huisnummer, gb_brp_algemeen_landelijk
 def profile_C():
     return [
-        SCOPE_GROUPS["from_name"]["scope_B"],
         SCOPE_GROUPS["from_name"]["scope_C"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_raadplegen_postcode_huisnummer"],
         FUNCTIONALITY_GROUPS["from_name"]["gob_brp_algemeen_landelijk"],
@@ -148,7 +147,7 @@ TOKEN_USER_geen_landelijk_permissie = token_user("geen_landelijk_permissie")
 
 
 def fields_persoon_basis():
-    return ["burgerservicenummer", "geboorte", "naam", "leeftijd"]
+    return ["burgerservicenummer", "geboorte", "leeftijd"]
 
 
 FIELDS_PERSOON_BASIS = fields_persoon_basis()
@@ -161,18 +160,18 @@ def fields_kinderen():
 FIELDS_KINDEREN = fields_kinderen()
 
 
-def fields_adres():
-    return ["burgerservicenummer", "adressering"]
+def fields_naam():
+    return ["burgerservicenummer", "naam"]
 
 
-FIELDS_ADRES = fields_adres()
+FIELDS_NAAM = fields_naam()
 
 
 def scope_fields():
     scope_to_fields = {
         "scope_A": list(set(FIELDS_PERSOON_BASIS)),
         "scope_B": list(set(FIELDS_PERSOON_BASIS + FIELDS_KINDEREN)),
-        "scope_C": list(set(FIELDS_PERSOON_BASIS + FIELDS_KINDEREN + FIELDS_ADRES)),
+        "scope_C": list(set(FIELDS_PERSOON_BASIS + FIELDS_NAAM)),
     }
     return {"from_name": scope_to_fields}
 
@@ -238,7 +237,7 @@ def transform_request_amsterdam_landelijk(hc_ams_request, jwt_token):
     return hc_ams_request
 
 
-def transform_request_filters(hc_ams_request, jwt_token):
+def transform_request(hc_ams_request, jwt_token):
     hc_ams_request = transform_request_amsterdam_landelijk(hc_ams_request, jwt_token)
     fields = []
     for scope, group_id in SCOPE_GROUPS["from_name"].items():

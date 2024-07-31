@@ -1,9 +1,8 @@
 import pytest
 
 from base_test_data import (
-    make_fields_uniform,
     transform_request_amsterdam_landelijk,
-    transform_request_filters,
+    transform_request,
     is_zoekvraag_authorised,
     is_amsterdam_authorised,
     is_landelijk_authorised,
@@ -13,9 +12,6 @@ from base_test_data import (
     has_bevragen_authorisation,
     has_inclusief_overledenen_query_parameter,
     FUNCTIONALITY_ZOEKVRAGEN,
-    FIELDS_PERSOON_BASIS,
-    FIELDS_KINDEREN,
-    FIELDS_ADRES,
     TOKEN_USER_A,
     TOKEN_USER_B,
     TOKEN_USER_C,
@@ -102,7 +98,7 @@ class TestNegatives:
             "gob_brp_raadplegen_bsn": "1234567",
         }
         token = TOKEN_USER_A
-        request_result = transform_request_filters(hc_ams_request, token)
+        request_result = transform_request(hc_ams_request, token)
         assert "kinderen" not in request_result["fields"]
         assert "adressering" not in request_result["fields"]
         for field in request_result["fields"]:
