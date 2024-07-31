@@ -61,6 +61,8 @@
 
 In deze tests gebruiken we fictieve group id's voor deze groepen. In de echte API-gateway moeten deze groups en hun id's bepaald worden bij de start van het component, ofwel vanuit configuratie, ofwel vanuit Entra.
 
+
+
 | application_role                               | code        |
 | ---------------------------------------------- | ----------- |
 | gob_brp_algemeen                               | F-12345-001 |
@@ -79,6 +81,8 @@ In deze tests gebruiken we fictieve group id's voor deze groepen. In de echte AP
 
 
 ## Data scopes
+
+Fictieve groups ID's:
 
 | scope   | code      |
 | ------- | --------- |
